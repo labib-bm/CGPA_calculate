@@ -1,0 +1,348 @@
+package Grading_System;
+
+interface fields {
+    public double getAttendance();
+    public double getAssignment();
+    public double getPresentation();
+    public double getQuiz();
+    public double getMid();
+    public double getFinal();
+    public double getProject();
+    public double getLab_Report();
+    public double getLab_Final();
+    public int Total();
+}
+
+import java.util.Scanner;
+
+public class Theory implements fields{
+    int presence;
+    int t_day;
+    double quiz1;
+    double quiz2;
+    double quiz3;
+    double Assignment;
+    double Presentation;
+    double Mid;
+    double Final;
+    public Theory(){
+        Scanner theory = new Scanner(System.in);
+       System.out.print("\nNumber of Class presence:     ");
+    this.presence = theory.nextInt();
+    System.out.print("\nNumber of Class Total:     ");
+    this.t_day = theory.nextInt();
+    System.out.print("\nQuiz 1:     ");
+    this.quiz1 = theory.nextDouble();
+    System.out.print("\nQuiz 2:     ");
+    this.quiz2 = theory.nextDouble();
+    System.out.print("\nQuiz 3:     ");
+    this.quiz3 = theory.nextDouble();
+    System.out.print("\nAssignment:     ");
+    this.Assignment = theory.nextDouble();
+    System.out.print("\nPresentation:     ");
+    this.Presentation = theory.nextDouble();
+    System.out.print("\nMid-Term:     ");
+    this.Mid = theory.nextDouble();
+    System.out.print("\nFinal:     ");
+    this.Final = theory.nextDouble();
+    System.out.print("\n");
+    }
+
+    @Override
+    public double getAttendance() {
+        double attendance = (double) ((presence*7)/t_day);
+        int attend = (int) attendance;
+        return attendance;
+    }
+
+    @Override
+    public double getAssignment() {
+        return Assignment;
+    }
+
+    @Override
+    public double getPresentation() {
+        return Presentation;
+    }
+
+    @Override
+    public double getQuiz() {
+        double quiz = ((quiz1+quiz2+quiz3)/3);
+        return quiz;
+    }
+
+    @Override
+    public double getMid() {
+        return Mid;
+    }    
+    
+    @Override
+    public double getFinal() {
+        return Final;
+    }
+
+    @Override
+    public int Total() {
+        int total = (int) (getAttendance()+getAssignment()+getQuiz()+getPresentation()+getMid()+getFinal());
+        return total;
+    }
+
+    @Override
+    public double getProject() {
+        return 0;
+    }
+
+    @Override
+    public double getLab_Report() {
+        return 0;
+    }
+
+    @Override
+    public double getLab_Final() {
+        return 0;
+    }
+    
+}
+
+import java.util.Scanner;
+
+public class Lab implements fields{
+    int presence;
+    int t_day;
+    double Lab1;
+    double Lab2;
+    double Lab3;
+    double Lab4;
+    double Lab5;
+    double Project;
+    double Final;
+    public Lab(){
+        Scanner theory = new Scanner(System.in);
+        System.out.print("\nNumber of Class present:     ");
+    this.presence = theory.nextInt();
+    System.out.print("\nNumber of Total Class:     ");
+    this.t_day = theory.nextInt();
+    System.out.print("\nLab Performance 1:     ");
+    this.Lab1 = theory.nextDouble();
+    System.out.print("\nLab Performance 2:     ");
+    this.Lab2 = theory.nextDouble();
+    System.out.print("\nLab Performance 3:     ");
+    this.Lab3 = theory.nextDouble();
+    System.out.print("\nLab Performance 4:     ");
+    this.Lab4 = theory.nextDouble();
+    System.out.print("\nLab Performance 5:     ");
+    this.Lab5 = theory.nextDouble();
+    System.out.print("\nProject:     ");
+    this.Project = theory.nextDouble();
+    System.out.print("\nLab Final:     ");
+    this.Final = theory.nextDouble();
+    }
+    
+    @Override
+    public double getAttendance() {
+        double attendance = (double) ((presence*10)/t_day);
+        return attendance;
+    }
+
+    @Override
+    public double getAssignment() {
+        return 0;
+    }
+
+    @Override
+    public double getPresentation() {
+        return 0;
+    }
+
+    @Override
+    public double getQuiz() {
+        return 0;
+    }
+
+    @Override
+    public double getMid() {
+        return 0;
+    }
+
+    @Override
+    public double getFinal() {
+        return 0;
+    }
+
+    @Override
+    public double getProject(){
+        return Project;
+    }
+
+    @Override
+    public double getLab_Report() {
+        double Lab = ((Lab1+Lab2+Lab3+Lab4+Lab5)/2);
+        return Lab;
+    }
+
+    @Override
+    public double getLab_Final() {
+        return Final;
+    }
+
+    @Override
+    public int Total() {
+        int total = (int) (getAttendance()+getProject()+getLab_Report()+getLab_Final());
+        return total;
+    }
+    
+}
+
+public class Course_CGPA {
+        int number;
+        public Course_CGPA(int number){
+            this.number = number;
+        }
+        public double calculate_CGPA(){
+            double C_CGPA = 0;
+            if(number <40) C_CGPA = 0.00;
+            if(number >=40 && number <45) C_CGPA = 2.00;
+            if(number >=45 && number <50) C_CGPA = 2.25;
+            if(number >=50 && number <55) C_CGPA = 2.50;
+            if(number >=55 && number <60) C_CGPA = 3.00;
+            if(number >=60 && number <65) C_CGPA = 3.25;
+            if(number >=65 && number <70) C_CGPA = 3.50;
+            if(number >=70 && number <75) C_CGPA = 3.50;
+            if(number >=75 && number <80) C_CGPA = 3.75;
+            if(number >=80) C_CGPA = 4.00;
+            return C_CGPA;
+        }        
+}
+
+
+public class Letter_Grade {
+    private double Grade;
+    private String k;
+
+    Letter_Grade(double d) {
+        Grade = d;
+    }
+    public void Letter_Grade(double d){
+        Grade = d;
+    }
+    public String Letter(){
+        if(Grade == 4.00) k = "A+";
+        else if(Grade == 3.75) k = "A";
+        else if(Grade == 3.50) k = "A-";
+        else if(Grade == 3.25) k = "B+";
+        else if(Grade == 3.00) k = "B";
+        else if(Grade == 2.75) k = "B-";
+        else if(Grade == 2.50) k = "C+";
+        else if(Grade == 2.25) k = "C";
+        else if(Grade == 2.00) k = "D";
+        else if(Grade == 0.00) k = "F";
+        return k;
+    }
+}
+
+
+import java.util.Scanner;
+
+public class Result {
+    public static void main(String[] args) {
+      //Student info
+        Scanner info = new Scanner(System.in);
+      System.out.print("Name:     ");
+      String Name = info.nextLine();
+      System.out.print("\nId:     ");
+      String Id = info.nextLine();
+      System.out.print("\nSemester:     ");
+      String sem = info.nextLine();
+      System.out.print("\nNumber of Courses:     ");
+      int num = info.nextInt();
+      //Max 6 Course;
+      int i; //for loops using
+      int[] marks = new int[6]; // marks per subject
+      double[] cgpa = new double[6]; //cgpa per subject
+      double[] S_Point = new double[6]; //cgpa point per subject
+      int credit=0; //credit per subject
+      double cr_point = 0; //total credit point
+      String[] S = new String[20];
+        String T1 = "CSE212";
+        String T2 = "CSE214";
+        String T3 = "GED201";
+        String T4 = "MAT211";
+        String L1 = "CSE213";
+        String L2 = "CSE215";
+      Scanner Code = new Scanner(System.in);
+      for(i=0;i<num;i++){
+          System.out.print("\nCourse Code:     ");
+        S[i] = Code.nextLine();
+        String s=S[i];
+            if((s.equals(T1)) || (s.equals(T2)) || (s.equals(T3)) || (s.equals(T4))){
+                System.out.println("Theory");
+            Theory T = new Theory();
+            credit+=3;
+            marks[i] = T.Total();
+            Course_CGPA CC = new Course_CGPA(marks[i]);
+            S_Point[i] = CC.calculate_CGPA();
+            cr_point += (S_Point[i] * 3);
+            }
+        else if((s.equals(L1)) || (s.equals(L2))){
+            System.out.println("Lab");
+            Lab L = new Lab();
+            credit+=1;
+            marks[i] = L.Total();
+            Course_CGPA CC = new Course_CGPA(marks[i]);
+            S_Point[i] = CC.calculate_CGPA();
+            cr_point += (S_Point[i] * 1);
+            }
+        else{
+            System.out.println("Invalid subject code. Type subject code again");
+            i--;
+        }
+      }
+            System.out.println("Student Info");
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("      Program               B.Sc. in Computer Science & Engineering");
+            System.out.println("      Name of Student       "+Name);
+            System.out.println("      Student ID            "+Id);
+            System.out.println("      Enrollment            Summer 2018");
+            System.out.println("      Batch                 50\n\n");
+            System.out.println("Academic Result of : "+sem);
+      for(i=0;i<num;i++){
+          String P = null;
+          int Cre = 0;
+          if((S[i].equals(T1)) || (S[i].equals(T2)) || (S[i].equals(T3)) || (S[i].equals(T4))){
+              if(S[i].equals(T1)){
+                  P = "Digital Electronics";
+                  Cre = 3;
+              }
+              if(S[i].equals(T2)){
+                  P = "Object Oriented Programming";
+                  Cre = 3;
+              }
+              if(S[i].equals(T3)){
+                  P = "Bangladesh Studies";
+                  Cre = 3;
+              }
+              if(S[i].equals(T4)){
+                  P = "Engineering Mathematics";
+                  Cre = 3;
+              }
+          }
+          else if((S[i].equals(L1)) || (S[i].equals(L2))){
+              if(S[i].equals(L1)){
+                   P = "Digital Electronics Lab";
+                   Cre = 1;
+              }
+              if(S[i].equals(L2)){
+                   P = "Object oriented Programming Lab";
+                   Cre = 1;
+              }
+          }
+            double KS = S_Point[i]; 
+            Letter_Grade LG = new Letter_Grade(KS);
+            System.out.println(S[i]+"   "+P+"   "+Cre+"    "+S_Point[i]+"   "+LG.Letter());
+      }
+      Double SGPA = cr_point / credit;
+            System.out.println("Total Credit Requirement:0  Total Credits Taken : "+credit+     "SGPA : "+SGPA);
+}
+}
+
+
